@@ -13,7 +13,7 @@ def main(request):
 
 
 @login_required
-def info(request):
+def profile(request):
     freelancer_instance, created = Freelancer.objects.get_or_create(user=request.user)
     if request.method == 'POST':
         form = InfoForm(request.POST, instance=freelancer_instance)
@@ -22,7 +22,7 @@ def info(request):
             return redirect('freelancer-main')
     else:
         form = InfoForm(instance=freelancer_instance)
-    return render(request, 'freelancer/info.html', {'form': form})
+    return render(request, 'freelancer/profile.html', {'form': form})
 
 
 @login_required

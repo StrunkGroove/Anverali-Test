@@ -1,0 +1,46 @@
+{% extends "home/base.html" %}
+
+{% block title %}Поиск задач{% endblock %}
+
+{% block content %}
+    <h1>Поиск задач</h1>
+    
+    <h4>Фильтры</h4>
+
+    <form method="get" action="">
+        <label for="directions">Направления:</label> <br>
+        {% for filter in filters %}
+            <input type="checkbox" id="direction_{{ filter.id }}" name="directions" value="{{ filter.name }}">
+            <label for="direction_{{ filter.id }}">{{ filter.name }}</label><br>
+        {% endfor %}
+        <br>
+        <label for="min_amount">Мин сумма заказа:</label>
+        <input type="number" name="min_amount" id="min_amount" min="0">
+        <br>
+        <label for="max_amount">Макс сумма заказа:</label>
+        <input type="number" name="max_amount" id="max_amount" min="0">
+        <br>
+        <button type="submit">Найти заказы</button>
+    </form>
+
+    <h4>Подходящие задачи</h4>
+
+    <ul>
+        {% for record in records %}
+            <li>
+                <strong>Наименование заказа:</strong> {{ record.name }} <br>
+                <strong>Направления:</strong>
+                <ul>
+                    {% for direction in record.directions.all %}
+                        <li>{{ direction.name }}</li>
+                    {% endfor %}
+                </ul>
+                <strong>Сумма заказа:</strong> {{ record.amount }} <br>
+                <strong>Имя заказчика:</strong> {{ record.customer.user.username }} <br>
+                <strong>Описание:</strong> {{ record.description }} <br>
+                <strong>Способ связи:</strong> {{ record.customer.contact_method }} <br>
+            </li>
+            <br>
+        {% endfor %}
+    </ul>
+{% endblock %}

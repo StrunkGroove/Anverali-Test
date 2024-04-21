@@ -1,0 +1,24 @@
+{% extends "home/base.html" %}
+
+{% block title %}Исполнители{% endblock %}
+
+{% block content %}
+    <h1>Исполнители</h1>
+    <ul>
+        {% for record in records %}
+            <li>
+                <strong>Наименование исполнителя:</strong> {{ record.user.username }} <br>
+                <strong>Опыт исполнителя:</strong> {{ record.get_experience_display }} <br>
+                <strong>Направления:</strong>
+                <ul>
+                    {% for direction in record.directions.all %}
+                        <li>{{ direction.name }}</li>
+                    {% endfor %}
+                </ul>
+                <strong>Описание:</strong> {{ record.description }} <br>
+                <strong>Способ связи:</strong> {{ record.contact_info }} <br>
+            </li>
+            <br>
+        {% endfor %}
+    </ul>
+{% endblock %}

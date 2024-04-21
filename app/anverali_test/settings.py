@@ -2,6 +2,7 @@ import os
 from os import getenv
 from pathlib import Path
 
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = getenv('SECRET_KEY')
@@ -11,7 +12,10 @@ DEBUG = getenv('DEBUG').upper() == 'TRUE'
 ALLOWED_HOSTS = getenv('ALLOWED_HOSTS').split(',')
 
 EXTENSION_APP = [
-
+    'home',
+    'accounts',
+    'freelancer',
+    'customer',
 ]
 
 INSTALLED_APPS = [
@@ -91,3 +95,7 @@ STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Accounts setting
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"

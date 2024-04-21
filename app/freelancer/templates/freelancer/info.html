@@ -1,0 +1,14 @@
+{% extends "home/base.html" %}
+
+{% block title %}
+    Личный профиль исполнителя
+{% endblock %}
+
+{% block content %}
+    <h1>Личный профиль исполнителя</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Изменить</button>
+    </form>
+{% endblock %}

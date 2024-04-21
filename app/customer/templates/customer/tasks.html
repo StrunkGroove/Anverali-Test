@@ -1,0 +1,27 @@
+{% extends "home/base.html" %}
+
+{% block title %}Add task{% endblock %}
+
+{% block content %}
+    <h1>Стр. заданий</h1>
+    <h2>Активные задания:</h2>
+    <ul>
+        {% for record in records %}
+            <li>
+                <strong>Наименоваие задачи:</strong> {{ record.name }} <br>
+                <strong>Направления:</strong> {{ record.direction }} <br>
+                <strong>Сумма:</strong> {{ record.amount }} <br>
+                <a href="{% url 'edit-task' record.id %}">Редактировать</a>
+                <a href="{% url 'delete-task' record.id %}">Удалить</a>
+            </li>
+            <br>
+        {% endfor %}
+    </ul>
+
+    <h2>Добавить новую задачу:</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Добавить</button>
+    </form>
+{% endblock %}
